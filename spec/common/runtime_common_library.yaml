@@ -16884,6 +16884,9 @@ info:
 openapi: 3.0.2
 paths: {}
 servers:
-- url: https://api.server.test/v1
+- description: Local Pieces OS Server for macOS & Windows
+  url: http://localhost:1000
+- description: Local Pieces OS Server for Linux
+  url: http://localhost:5323
 tags:
 - name: Runtime

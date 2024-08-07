@@ -9614,16 +9614,10 @@ paths:
       tags:
       - Connector
 servers:
-- description: Local Generated Mock Data
+- description: Local Pieces OS Server for macOS & Windows
   url: http://localhost:1000
-- description: Stoplight Static Mock Data
-  url: https://stoplight.io/mocks/pieces/platform-openapi:main/13067253
-- description: Authentication Domain
-  url: https://auth.pieces.services
-- description: API Domain
-  url: https://api.pieces.services
-- description: Auth0
-  url: https://pieces.us.auth0.com
+- description: Local Pieces OS Server for Linux
+  url: http://localhost:5323
 tags:
 - name: Activity
 - name: Activities
