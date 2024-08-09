@@ -2620,9 +2620,9 @@ paths:
         the cloud.
 
 
-        NOTE: This is a streamed version of the /backups/create. and Since the Generator
-        is unable to generate a streamed endpoint. this is a place holder, and will
-        need to be implemented isolated from the code generator.'
+        NOTE: This is a streamed version of the /backups/<backup>/restore. and Since
+        the Generator is unable to generate a streamed endpoint. this is a place holder,
+        and will need to be implemented isolated from the code generator.'
       operationId: backup-restore-specific-backup-streamed
       requestBody:
         content:
@@ -2660,6 +2660,54 @@ paths:
       summary: /backup/{backup}/restore/streamed [POST]
       tags:
       - Backup
+  /backup/{backup}/restore/streamed/websocket:
+    get:
+      description: 'WEBOCKET IMPLEMENTATION: This take a local database and ensure
+        that it is backed up to the cloud.
+
+
+        NOTE: This is a streamed version of the /backups/<backup>/restore. and Since
+        the Generator is unable to generate a streamed endpoint. this is a place holder,
+        and will need to be implemented isolated from the code generator.'
+      operationId: backup-restore-specific-backup-streamed-websocket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../../common/runtime_common_library.yaml#/components/schemas/Backup/
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: ../../common/runtime_common_library.yaml#/components/schemas/BackupStreamedProgress/
+          description: OK
+        '500':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Internal Server Error
+        '505':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: HTTP Version Not Supported, This means that your user needs
+            to update their local os, or they cannot perform backup operation with
+            the cloud
+        '511':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Authentication Required, This means that you user needs to
+            be authenticated with OS in order to change the beta status
+      summary: /backup/{backup}/restore/streamed/websocket [WS]
+      tags:
+      - Backup
+    parameters:
+    - $ref: ../../common/runtime_common_library.yaml#/components/parameters/backup/
   /backups:
     get:
       description: 'This will get a snapshot of Backsup within the cloud.
@@ -2783,6 +2831,74 @@ paths:
           description: Authentication Required, This means that you user needs to
             be authenticated with OS in order to perform this action
       summary: /backups/create/streamed [POST]
+      tags:
+      - Backups
+  /backups/create/streamed/websocket:
+    get:
+      description: 'WEBSOCKET VERSION! This take a local database and ensure that
+        it is backed up to the cloud.
+
+
+        NOTE: This is a streamed version of the /backups/create. and Since the Generator
+        is unable to generate a streamed endpoint. this is a place holder, and will
+        need to be implemented isolated from the code generator.'
+      operationId: backups-create-new-backup-streamed-websocket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../../common/runtime_common_library.yaml#/components/schemas/SeededBackup/
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: ../../common/runtime_common_library.yaml#/components/schemas/BackupStreamedProgress/
+          description: OK
+        '500':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Internal Server Error
+        '505':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: HTTP Version Not Supported, This means that your user needs
+            to update their local os, or they cannot perform backup operation with
+            the cloud
+        '511':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Authentication Required, This means that you user needs to
+            be authenticated with OS in order to perform this action
+      summary: /backups/create/streamed/websocket [WS]
+      tags:
+      - Backups
+  /backups/streamed/progress:
+    get:
+      description: This endpoint is a Websocket, that will list all the current websockets
+        that are in progress, this will emit changes as there are changes with the
+        backups or restores in progress.
+      operationId: backups-streamed-progress
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: ../../common/runtime_common_library.yaml#/components/schemas/BackupsStreamedProgress/
+          description: OK
+        '500':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Internal Server Error
+      summary: /backups/streamed/progress [WS]
       tags:
       - Backups
   /backups/{backup}/delete:
