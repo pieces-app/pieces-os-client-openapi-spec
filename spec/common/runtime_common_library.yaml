@@ -1987,7 +1987,18 @@ components:
       title: ApigeeSyncAuthorization
       type: object
     Application:
-      description: ''
+      description: 'A Model to describe what application a format/analytics event
+        originated.
+
+
+        mechanism: This will let us know where this came from.
+
+        ie.only 2 enums are used here or else throw and error.
+
+        default mechanism here is MANUAL- meaning that this came from our user Connecting
+        an application.
+
+        INTERNAL - means that this came from a shareable link'
       properties:
         automaticUnload:
           description: This is a proper that will let us know if we will proactivity
@@ -2693,8 +2704,6 @@ components:
           $ref: '#/components/schemas/ModelDownloadProgressStatusEnum'
       title: BackupStreamedProgress
       type: object
-      x-stoplight:
-        id: ufjwjnk3dpoki
     Backups:
       description: This is a plural model of many Cloud Backups.
       properties:
@@ -2718,6 +2727,22 @@ components:
       type: object
       x-stoplight:
         id: n8ir9eh7deh6z
+    BackupsStreamedProgress:
+      description: This is used in the backups plural stream to stream the changes
+        to all the restorations and backups in progress.
+      properties:
+        backups:
+          items:
+            $ref: '#/components/schemas/BackupStreamedProgress'
+          type: array
+        restorations:
+          items:
+            $ref: '#/components/schemas/BackupStreamedProgress'
+          type: array
+        schema:
+          $ref: '#/components/schemas/EmbeddedModelSchema'
+      title: BackupsStreamedProgress
+      type: object
     BrowserSelection:
       description: This is a given bit of text/code that is selected in the browser,
         this can be a copy/paste/selection
@@ -11373,8 +11398,6 @@ components:
           $ref: '#/components/schemas/EmbeddedModelSchema'
       title: SeededBackup
       type: object
-      x-stoplight:
-        id: b2xbx0zsk4noo
     SeededClassification:
       description: This is the specific classification of an Asset's Format.(This
         is on a per format basis b/c an asset could have different formats that are
