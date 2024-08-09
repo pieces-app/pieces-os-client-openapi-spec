@@ -1387,6 +1387,9 @@ paths:
       summary: /applications/session/open [POST]
       tags:
       - Applications
+  /applications/{application}:
+    parameters:
+    - $ref: ../../common/runtime_common_library.yaml#/components/parameters/application/
   /asset/reclassify:
     post:
       description: Retrieves the formats available for a specified asset.
@@ -5717,6 +5720,7 @@ paths:
       summary: /os/memory/optimize [POST]
       tags:
       - OS
+  /os/metadata: {}
   /os/permissions:
     get:
       description: 'This will only work on Macos and Windows.
@@ -9729,6 +9733,9 @@ paths:
       summary: /{application}/suggestion [POST]
       tags:
       - Connector
+  /{application}/track:
+    parameters:
+    - $ref: ../../common/runtime_common_library.yaml#/components/parameters/application/
 servers:
 - description: Local Pieces OS Server for macOS & Windows
   url: http://localhost:1000
